@@ -99,9 +99,6 @@ Conecte o pino 8 com o pino RX do adaptador (TX<->RX)
 
 Conecte o pino 10 com o pino TX do adaptador (RX<->TX)
 
-## 
-Seguindo todas as etapas passadas, o seu cartão SD ficará
-
 Tenha certeza que os cabos no adaptador US-UART estão certos, caso não apareça nada no terminal após "bootar" o Raspberry, tente inverter os cabos no adaptador RX<->TX e verifique novamente.
 
 Escolha algum programa de comunicação serial (por exemplo o minicom), e configure a conexão serial para ter os parametros a seguir:
@@ -114,6 +111,164 @@ Flow Control: None
 ```
 
 Após começar o monitoramento na porta escolhida, ligue o Raspberry com o cartão SD já dentro e o VxWorks kernel vai "bootar" automaticamente:
+```
+U-Boot 2024.10-01129-g7036abbd5c39 (Oct 19 2024 - 22:28:55 -0300)
+
+DRAM:  948 MiB
+RPI 3 Model B+ (0xa020d3)
+Core:  79 devices, 13 uclasses, devicetree: board
+MMC:   mmc@7e202000: 0, mmcnr@7e300000: 1
+Loading Environment from FAT... OK
+In:    serial,usbkbd
+Out:   serial,vidconsole
+Err:   serial,vidconsole
+Net:   No ethernet found.
+
+starting USB...
+Bus usb@7e980000: USB DWC2
+scanning bus usb@7e980000 for devices...
+Warning: lan78xx_eth MAC addresses don't match:
+Address in DT is                b8:27:eb:15:90:74
+Address in environment is       b8:27:eb:06:66:ec
+4 USB Device(s) found
+       scanning usb for storage devices... 0 Storage Device(s) found
+Hit any key to stop autoboot:  0
+9157968 bytes read in 387 ms (22.6 MiB/s)
+## Booting kernel from Legacy Image at 08000000 ...
+   Image Name:   vxworks
+   Image Type:   AArch64 VxWorks Kernel Image (uncompressed)
+   Data Size:    9157904 Bytes = 8.7 MiB
+   Load Address: 00100000
+   Entry Point:  00100000
+   Verifying Checksum ... OK
+Working FDT set to 0
+   Loading Kernel Image to 100000
+   !!! WARNING !!! Using legacy DTB
+## Starting vxWorks at 0x00100000, device tree at 0x00000000 ...
+Instantiatm0 as rawFs,  devx1
+Formatting /ram0 for HRFS v1.2
+Instantiating /ram0 as rawFs, device = 0x1
+Formatting...OK.
+Targe vxTargetantiating /tmp as  device = 0x10001
+Formatting /tmp for HRFS v1.2
+Instantiating /tmp as rawFs, device = 0x10001
+Formatting...OK.
+
+ _________            _________
+ \........\          /......../
+  \........\        /......../
+   \........\      /......../
+    \........\    /......../
+     \........\   \......./
+      \........\   \...../              VxWorks SMP 64-bit
+       \........\   \.../
+        \........\   \./     Release version: 21.03
+         \........\   -      Build date: Apr 20 2021 16:34:43
+          \........\
+           \......./         Copyright Wind River Systems, Inc.
+            \...../   -                 1984-2021
+             \.../   /.\
+              \./   /...\
+               - --
+
+                   Board: Raspberry Pi 3 Model B+ - ARMv8
+               CPU Count: 4
+          OS Memory Size: ~883MB
+        ED&R Policy Mode: Deployed
+     Debug Agent: Started (always)
+         Stop Mode Agent: Not started
+              BSP Status: *** UNSUPPORTED ***
+
+usrNetDevNameGet: no network device
+usrNetDevNameGet: no network device
+Thu Jan  1 00:00:01 1970: ipcom_drv_eth[1e6170]: Error: ipcom_drv_eth_bind_to_devs :: failed to get name of boot device
+
+ Adding 14452 symbols for standalone.
+
+-> Thu Jan  1 00:00:05 1970: ipnet[196b70]: Error: ipcom_getsockaddrbyaddr failed gw: dhcp
+Attached TCP/IP interface to usb2End unit 0
+Connecting to the Network...
+
+Network configuration:
+ifname usb2End0 inet 192.168.0.241 mac 00:11:22:33:44:55
+
+This device is also accessible over telnet!
+        E.g. telnet 192.168.0.241
+```
+
+# Desenvolvendo uma aplicação:
+
+Dentro da pasta instalada no passo [(Configurar ambiente de desenvolvimento)](#configurar-ambiente-de-desenvolvimento), crie um arquivo `source`do SDK.
+
+```
+$ source sdkenv.sh
+```
+
+## Crie um arquivo em C como por exemplo foo.c:
+```
+#include <stdio.h>
+
+int main(void)
+    {
+    printf("hello, world!\n");
+    return 0;
+    }
+```
+
+## Crosscompile o arquivo foo.c usando o comando:
+```
+$ wr-cc -rtp foo.c -static -o foo.vxe
+```
+Você terá um arquivo foo.c e foo.vxe no diretorio onde você compilou.
+
+## Crie um servidor FTP:
+
+Crie um servidor FTP na porta 21, utilizando como usúario e senha as seguintes credenciais.
+
+- user: target
+- password: vxtarget
+
+Abra um terminal na pasta `home`e rode o comando:
+```
+$ sudo python -m pyftpdlib -p 21 -u target -P vxTarget -d $HOME &
+```
+
+Anote o IP do host onde o servidor FTP foi aberto, em linux o comando `ip a` serve.
+Também é possível testar se o servidor está funcionando corretamente, abrindo um outro terminal e utilizando o comando:
+```
+sudo ftp localhost
+```
+#Lembrete# o destiono `#HOME` pode ser diferente caso os arquivos foo estejam armazenados em um Path diferente.
+
+## Conecte o vxWorks no servidor FTP e execute o arquivo compilado:
+Após ter o servidor FTP rodando, execute o comando no vxWorks shell:
+```
+-> netDevCreate ("/wrs", "192.168.10.191", 1)
+```
+Onde (192.168.10.191) é o IP do host onde o servidor FTP foi criado.
+
+Finalmente siga os comandos a seguir:
+```
+-> cmd
+[vxWorks *]# cd /wrs
+[vxWorks *]# pwd
+/wrs/
+[vxWorks *]# ls foo.c
+foo.c
+[vxWorks *]# more foo.c
+#include <stdio.h>
+
+int main(int argc, char **argv) {
+    printf("Hello World\n");
+    return 0;
+}
+[vxWorks *]#
+[vxWorks *]# foo.vxe
+Launching process 'foo.vxe' ...
+Process 'foo.vxe' (process Id = 0xffff8000005e85d0) launched.
+Hello world
+[vxWorks *]#
+```
 
 # Referencia Principal
 https://labs.windriver.com/downloads/wrsdk-vxworks7-docs/2103/README_raspberrypi3b.html
