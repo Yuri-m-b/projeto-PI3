@@ -37,3 +37,5 @@ https://www.youtube.com/watch?v=-Xaf8RKmEFQ
 
 https://learning.windriver.com/creating-your-own-layers-and-packages
 
+https://wiki.emacinc.com/wiki/Getting_Started_With_Minicom
+
