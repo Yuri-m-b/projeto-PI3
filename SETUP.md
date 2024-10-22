@@ -198,12 +198,6 @@ This device is also accessible over telnet!
 
 # Desenvolvendo uma aplicação:
 
-Dentro da pasta instalada no passo [(Configurar ambiente de desenvolvimento)](#configurar-ambiente-de-desenvolvimento), crie um arquivo `source`do SDK.
-
-```
-$ source sdkenv.sh
-```
-
 ## Crie um arquivo em C como por exemplo foo.c:
 ```
 #include <stdio.h>
@@ -214,9 +208,12 @@ int main(void)
     return 0;
     }
 ```
-
 ## Crosscompile o arquivo foo.c usando o comando:
+
+Dentro da pasta instalada no passo [(Configurar ambiente de desenvolvimento)](#configurar-ambiente-de-desenvolvimento), crie um arquivo `source`do SDK e utilize o comando para fazer a compilação.
+
 ```
+$ source sdkenv.sh
 $ wr-cc -rtp foo.c -static -o foo.vxe
 ```
 Você terá um arquivo foo.c e foo.vxe no diretorio onde você compilou.
