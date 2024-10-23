@@ -1,29 +1,29 @@
+#include <stdio.h>
 #include <vxWorks.h>
 #include <taskLib.h>
-#include <stdio.h>
-#include <time.h>
 
-#define TASK_PRIORITY 100    // Define prioridade da task
-#define TASK_STACK_SIZE 1000 // Define stack size da task
-#define LOOP_DELAY 100      // Delay em milisegundos
-
-// Task function
-void helloWorldTask() {
-        printf("Hello, World!\n");
+// Custom repeat function that executes a task multiple times
+void repeat(void (*task)(void), int times) {
+    for (int i = 0; i < times; i++) {
+        task();
+        //taskDelay(10);
+    }
 }
 
-int main() {
-    // Criando a task
-    while(1){
-        TASK_ID taskId = taskSpawn("tHelloWorld", 
-                                TASK_PRIORITY, 
-                                0, 
-                                TASK_STACK_SIZE, 
-                                (FUNCPTR)helloWorldTask, 
-                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        taskDelay(LOOP_DELAY);
-    }
+// Example task to be repeated
+void exampleTask(void) {
+    printf("Task executed!\n");
+}
 
+// Function that calls the repeat() function
+void callRepeatFunction(void) {
+    int repeatCount = 5;  // Number of times to repeat the task
+    printf("Repeating the task %d times...\n", repeatCount);
+    repeat(exampleTask, repeatCount);  // Call repeat with exampleTask
+}
 
+// Main function to start execution
+int main(void) {
+    taskSpawn("tCallRepeat", 100, 0, 2000, (FUNCPTR) callRepeatFunction, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     return 0;
 }

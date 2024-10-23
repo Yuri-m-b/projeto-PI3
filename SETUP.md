@@ -80,7 +80,7 @@ $ cd u-boot
 $ CROSS_COMPILE=aarch64-linux-gnu- make rpi_3_b_plus_defconfig  
 $ CROSS_COMPILE=aarch64-linux-gnu- make  
 ```
-Após compilar o arquivo u-boot.bin, copie e cole ele dentro do cartão SD como `kernel8.img`
+Após compilar o arquivo u-boot.bin, copie e cole ele no cartão SD como `kernel8.img`
 ## Crie uma pasta chamada vx no cartão SD
 Crie uma pasta chamada vx no seu Cartão SD e nela coloque o arquivo uVxWorks que pode ser encontrado dentro da pasta descompactada do SDK instalado na etapa: [(Configurar ambiente de desenvolvimento)](#configurar-ambiente-de-desenvolvimento)
 O arquivo `uVxWorks`pode ser encontrado no caminho `/vxsdk/bsps/rpi_3_0_1_1_2/uVxWorks`
@@ -91,6 +91,7 @@ O arquivo `uVxWorks`pode ser encontrado no caminho `/vxsdk/bsps/rpi_3_0_1_1_2/uV
 # Conectando Raspberry e boot com VxWorks
 Com o cartão SD pronto, já é possível inserir o cartão de volta no Raspberry Pi 3, agora para a conexão com o Raspberry utilizaremos um adaptador USB para UART.
 Nesse projeto utilizamos um Raspberry PI 3B+ então suas portas para comunicação UART podem ser encontradas nesse diagrama:
+
 ![sd](./etapa_1/setup_files/j8header-3b-plus.png)
 
 Conecte o pino 6 com o Ground do adaptador
@@ -101,7 +102,12 @@ Conecte o pino 10 com o pino TX do adaptador (RX<->TX)
 
 Tenha certeza que os cabos no adaptador US-UART estão certos, caso não apareça nada no terminal após "bootar" o Raspberry, tente inverter os cabos no adaptador RX<->TX e verifique novamente.
 
-Escolha algum programa de comunicação serial (por exemplo o minicom), e configure a conexão serial para ter os parametros a seguir:
+Escolha algum programa de comunicação serial (por exemplo o minicom):
+```
+sudo apt-get install minicom
+sudo minicom -s
+```
+Configure a conexão serial para ter os parametros a seguir e salve como dfl:
 ```
 Baud Rate: 115200
 Data: 8 bit
@@ -109,7 +115,13 @@ Stop: 1 bit
 Parity: None
 Flow Control: None
 ```
-
+Para começar o monitoramento na porta utilize o comando a seguir, considerando que ttsyUSB0 é a porta onde o adaptador está conectado.
+```
+ls /dev/tty* // Comando para ver quais portas existem no seu sistema.
+# minicom ttyUSB0
+ou apenas
+# minicom
+```
 Após começar o monitoramento na porta escolhida, ligue o Raspberry com o cartão SD já dentro e o VxWorks kernel vai "bootar" automaticamente:
 ```
 U-Boot 2024.10-01129-g7036abbd5c39 (Oct 19 2024 - 22:28:55 -0300)
