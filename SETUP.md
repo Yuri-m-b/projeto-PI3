@@ -38,7 +38,7 @@ sudo apt install bison flex
 sudo apt install libssl-dev
 sudo apt install libgnutls28-dev
 `````
-Em seguida ter um servidor FTP instalado no seu host de desenvolvimento facilitará a implantação de aplicativos e permitirá o acesso ao sistema de arquivos do host a partir de um alvo VxWorks.
+Em seguida, ter um servidor FTP instalado no seu host onde é realizado o desenvolvimento facilitará a implementação de aplicativos e permitirá o acesso ao sistema de arquivos do host a partir de um alvo VxWorks.
 
 Para acomodar as diversas configurações de tempo de execução das imagens do kernel VxWorks incluídas nos SDKs, você pode estar interessado em usar uma opção de servidor FTP baseada no pyftpdlib.
 `````
@@ -69,7 +69,7 @@ Nessa etapa estaremos documentando dois passos, você só precisará fazer um de
 
 1- Metodo mais simples:
 
-Baixe o arquivo [kernel8.img](/etapa_1/setup_files/kernel8.img) desse repositorio e salve ele no cartão SD. Exemplo: (Cartão SD/kerlnel8.img)
+Baixe o arquivo [kernel8.img](/etapa_1/setup_files/kernel8.img) desse repositório e salve ele no cartão SD. Exemplo: (Cartão SD/kerlnel8.img)
 
 2- Compile e salve o seu propio arquivo u-boot seguindo os passos a seguir:
 
@@ -100,7 +100,7 @@ Conecte o pino 8 com o pino RX do adaptador (TX<->RX)
 
 Conecte o pino 10 com o pino TX do adaptador (RX<->TX)
 
-Tenha certeza que os cabos no adaptador US-UART estão certos, caso não apareça nada no terminal após "bootar" o Raspberry, tente inverter os cabos no adaptador RX<->TX e verifique novamente.
+Tenha certeza que os cabos no adaptador US-UART estão certos, caso não apareça nada no terminal após "bootar" o Raspberry, verifique as conexões e tente novamente.
 
 Escolha algum programa de comunicação serial (por exemplo o minicom):
 ```
