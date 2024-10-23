@@ -279,5 +279,5 @@ Hello world
 [vxWorks *]#
 ```
 
-# Referencia Principal
+# Referência Principal
 https://labs.windriver.com/downloads/wrsdk-vxworks7-docs/2103/README_raspberrypi3b.html
