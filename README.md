@@ -4,7 +4,7 @@ Resumo: Realizar a análise de parâmetros temporais de um sistema distribuído 
 
 ## Etapa 1: Setup e tarefas de exemplo
 
-**Objetivo**: As tarefas para a primeira etapa do projeto foram pensadas com o intuito de serem focadas ao reconhecimento, instalação e testes basícos utilizando a ferramenta VxWorks.
+**Objetivo**: As tarefas para a primeira etapa do projeto foram pensadas com o intuito de serem focadas ao reconhecimento, instalação e criação de tarefas simples utilizando a ferramenta VxWorks.
 
 
 Tarefas:
@@ -21,7 +21,7 @@ Tarefas:
 
 # Setup
 
-Como o setup para o VxWorks requer muitos passos e a documentação oficial para o Raspberry 3B+ está desatualizada decidimos criar um tutorial que documenta todas as etapas e problemas que encontramos ao longo do processo de setup. Esse tutorial pode ser encontrado em: [SETUP](/SETUP.md)
+Como o setup para o VxWorks requer muitos passos e a documentação oficial para o Raspberry 3B+ está desatualizada, decidimos criar um tutorial que documenta todas as etapas e problemas que encontramos ao longo do processo de setup para iniciar o desenvolvimento. Esse tutorial pode ser encontrado em: [SETUP](/SETUP.md)
 
 ## Referências:
 https://labs.windriver.com/downloads/wrsdk-vxworks7-docs/2103/README_raspberrypi3b.html
