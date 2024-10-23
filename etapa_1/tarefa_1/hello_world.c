@@ -2,16 +2,16 @@
 #include <taskLib.h>
 #include <stdio.h>
 
-/* Definição da função que será executada pela task */
+// Definição da função que será executada pela task 
 void helloWorldTask()
 {
     printf("Hello, World!\n");
 }
 
-/* Função principal para criar a task */
+// Função principal para criar a task 
 void createHelloWorldTask()
 {
-    /* Cria uma task com a prioridade 100 e um tamanho de pilha de 2000 bytes */
+    // Cria uma task com a prioridade 100 e um tamanho de pilha de 2000 bytes
     int taskId = taskSpawn(
         "tHelloWorld",   // Nome da task
         100,             // Prioridade da task (100 é uma prioridade média)
@@ -21,7 +21,7 @@ void createHelloWorldTask()
         0, 0, 0, 0, 0,   // Argumentos para a função (até 10 argumentos permitidos)
         0, 0, 0, 0, 0);
 
-    /* Verifica se a task foi criada com sucesso */
+    // Verifica se a task foi criada com sucesso 
     if (taskId == ERROR)
     {
         printf("Erro ao criar a task!\n");
@@ -32,7 +32,7 @@ void createHelloWorldTask()
     }
 }
 
-/* Função principal */
+// Função principal
 int main()
 {
     printf("Iniciando a aplicação...\n");
