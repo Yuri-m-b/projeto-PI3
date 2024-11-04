@@ -32,7 +32,7 @@ Tarefas:
 - [x] Criar um log para as tarefas.
 - [x] Limitar pacotes enviados e adequar envio e recebimento para usar o protocolo UDP.
 - [x] Sincronizar tarefas periódicas.
-- [ ] Documentar código e mostrar resultado para a tarefa que lê pacotes da rede.
+- [x] Documentar código e mostrar resultado para a tarefa que lê pacotes da rede.
 - [ ] Registrar e analisar diferenças nas tarefas criadas até o momento utilizando logs e adequando as tarefas de testes para o escopo desejado.
 
 **Entrega**: [Etapa 2](/etapa_2/)

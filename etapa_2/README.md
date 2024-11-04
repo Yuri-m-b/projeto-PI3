@@ -94,3 +94,4 @@ Como o código para essa tarefa utiliza envio de dados, é preciso abrir um term
 ## Tarefa 4:
 
 Sincronizar tarefas períodicas
+![tarefa_4](/etapa_2/image_files/tarefa_4.png)
