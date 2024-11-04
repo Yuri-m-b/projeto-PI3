@@ -1,5 +1,7 @@
 # Tarefas
 
+Nessa etapa uma informação importante foi descoberta ao longo da criação das tarefas. Para o VxWorks por padrão, um processo é encerrado quando a função main() retorna, porque o compilador C insere automaticamente uma chamada a exit() no final de main(). Isso é um comportamento indesejável se main() criar outras tarefas, pois encerrar o processo exclui todas as tarefas que estavam sendo executadas nele. Para evitar que isso aconteça, qualquer aplicativo que use main() para criar tarefas pode chamar taskExit() em vez de return() como a última instrução na rotina main(). Quando main() inclui taskExit() como sua última chamada, a tarefa inicial do processo pode sair sem que o kernel encerre automaticamente o processo.
+
 ## Tarefa 1:
 
 Criar uma tarefa que lê um pacote de rede
