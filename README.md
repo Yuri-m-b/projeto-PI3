@@ -6,16 +6,17 @@ Resumo: Realizar a análise de parâmetros temporais de um sistema distribuído 
 
 **Objetivo**: As tarefas para a primeira etapa do projeto foram pensadas com o intuito de serem focadas ao reconhecimento, instalação e testes basícos utilizando a ferramenta VxWorks.
 
-```
+
 Tarefas:
-        Criar uma tarefa no VxWorks.
-        Criar uma tarefa periódica..
-        Criar uma tarefa que envia pacotes para a rede.
-        Documentar passo-a-passo de como configurar ambiente para programar as tarefas em VxWorks.
-        Documentar código e mostrar resultado para a primeira tarefa criada.
-        Documentar código e mostrar resultado para a tarefa períodica.
-        Documentar código e mostrar resultado para a tarefa que envia para a rede.
-```
+
+- [x] Criar uma tarefa no VxWorks.
+- [x] Criar uma tarefa periódica.
+- [ ] Criar uma tarefa que envia pacotes para a rede.
+- [x] Documentar passo-a-passo de como configurar ambiente para programar as tarefas em VxWorks.
+- [ ] Documentar código e mostrar resultado para a primeira tarefa criada.
+- [ ] Documentar código e mostrar resultado para a tarefa períodica.
+- [ ] Documentar código e mostrar resultado para a tarefa que envia para a rede.
+
 **Entrega**: [Etapa 1](/etapa_1/)
 
 # Setup
