@@ -42,3 +42,4 @@ https://learning.windriver.com/creating-your-own-layers-and-packages
 
 https://wiki.emacinc.com/wiki/Getting_Started_With_Minicom
 
+https://www.ee.torontomu.ca/~courses/ee8205/Data-Sheets/Tornado-VxWorks/vxworks/ref/libIndex.html
