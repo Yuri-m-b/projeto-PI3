@@ -2,27 +2,31 @@
 #include <vxWorks.h>
 #include <taskLib.h>
 
-// Funcao repeat que executa uma task
-void repeat(void (*task)(void), int times) {
-    for (int i = 0; i < times; i++) {
-        task(); // Em VxWorks significa uma task independente no thread
-    }
+// Funcao de log
+void logMsg(const char *fmt, ...) {
+    va_list args;
+    va_start(args, fmt);
+    vprintf(fmt, args);
+    va_end(args);
 }
 
-// Task com printf
-void exampleTask(void) {
-    printf("Hello World!\n");
-}
 
 // Task periodica
 void callRepeatFunction(void) {
     int repeatCount = 5;  // Numero de vezes que a task ira repetir
-    printf("Repetindo a task %d vezes...\n", repeatCount);
-    repeat(exampleTask, repeatCount);  // Chama a funcao repeat
+    for (int i = 0; i < repeatCount; i++) {
+        logMsg("Hello World!\n");
+        taskDelay(100);
+    }
+    logMsg("Repetindo a task %d vezes...\n", repeatCount);
 }
 
 // Main function
 int main(void) {
-    taskSpawn("tCallRepeat", 100, 0, 2000, (FUNCPTR) callRepeatFunction, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    return 0;
+    int taskId = taskSpawn("tCallRepeat", 100, 0, 2000, (FUNCPTR) callRepeatFunction, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    
+    while(1)
+    {
+        taskDelay(100);
+    }
 }

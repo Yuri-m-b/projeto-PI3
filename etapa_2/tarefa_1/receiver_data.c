@@ -51,16 +51,16 @@ void receivePackets(void) {
 
     printf("Esperando por dados...\n");
 
-    // Listen for incoming packets
+    // Esperando pacotes.
     while (packetCount < MAX_PACKAGES) {
         receivedBytes = recvfrom(sock, buffer, BUFFER_SIZE, 0, NULL, NULL);
         if (receivedBytes == ERROR) {
             logMsg("Erro ao receber pacote\n");
         } 
         else {
-            buffer[receivedBytes] = '\0'; // Null-terminate if you expect text data
+            buffer[receivedBytes] = '\0'; // Termine com null se você espera dados de texto
             logMsg("Recebeu dado: %s\n", buffer);
-            packetCount++;  // Increment packet counter
+            packetCount++;
         }
     }
 

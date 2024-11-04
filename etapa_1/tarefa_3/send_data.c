@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <semLib.h>
 #include <vxWorks.h>
 #include <taskLib.h>
 #include <sockLib.h>
@@ -10,6 +11,8 @@
 #define SERVER_IP "192.168.0.113"  // IP do destino
 #define SERVER_PORT 21             // Porta do destino
 #define BUF_SIZE 1024              // Tamanho do buffer
+
+SEM_ID taskDoneSem; // "Semaforo" para sinal de conclusão da task
 
 void sendPacket(void)
 {
@@ -48,10 +51,32 @@ void sendPacket(void)
 
     // Fechar socket
     close(sock);
+    // Retorna sinal para conclusão da task
+    semGive(taskDoneSem);
 }
 
 int main()
 {
-    taskSpawn("tSendData", 100, 0, 2000, (FUNCPTR) sendPacket, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    return 0;
+    // Cria uma "semaforo" binario
+    taskDoneSem = semBCreate(SEM_Q_PRIORITY, SEM_EMPTY);
+    int taskID = taskSpawn("tSendData", 100, 0, 2000, (FUNCPTR) sendPacket, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    
+    if (taskID == ERROR) {
+        logMsg("Aconteceu um erro ao criar a task.\n");
+    } else {
+        logMsg("Task criada com sucesso, task ID: %d\n", taskID);
+
+        // Espera pelo sinal do "semaforo"
+        semTake(taskDoneSem, WAIT_FOREVER);
+
+        // Termina a task quando o sinal do "semaforo" for recebido
+        if (taskClose(taskID) == ERROR) {
+            logMsg("Erro terminando a task %d.\n", taskID);
+        } else {
+            logMsg("Task %d terminada com sucesso.\n", taskID);
+        }
+    }
+
+    // Clean up do "semaforo""
+    semDelete(taskDoneSem);
 }

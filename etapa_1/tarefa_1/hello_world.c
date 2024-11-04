@@ -2,15 +2,25 @@
 #include <taskLib.h>
 #include <stdio.h>
 
+// Funcao de log
+void logMsg(const char *fmt, ...) {
+    va_list args;
+    va_start(args, fmt);
+    vprintf(fmt, args);
+    va_end(args);
+}
+
+
 // Definição da função que será executada pela task 
 void helloWorldTask()
 {
-    printf("Hello, World!\n");
+    logMsg("Hello, World!\n");
 }
 
-// Função principal para criar a task 
-void createHelloWorldTask()
+// Função principal
+int main()
 {
+    printf("Iniciando a aplicação...\n");
     // Cria uma task com a prioridade 100 e um tamanho de pilha de 2000 bytes
     int taskId = taskSpawn(
         "tHelloWorld",   // Nome da task
@@ -24,19 +34,14 @@ void createHelloWorldTask()
     // Verifica se a task foi criada com sucesso 
     if (taskId == ERROR)
     {
-        printf("Erro ao criar a task!\n");
+        logMsg("Erro ao criar a task!\n");
     }
     else
     {
-        printf("Task criada com sucesso, ID: %d\n", taskId);
+        logMsg("Task criada com sucesso, ID: %d\n", taskId);
     }
+    taskClose(taskId);
+
+    return 0; 
 }
 
-// Função principal
-int main()
-{
-    printf("Iniciando a aplicação...\n");
-    createHelloWorldTask();
-
-    return 0;
-}

@@ -93,5 +93,11 @@ Como o código para essa tarefa utiliza envio de dados, é preciso abrir um term
 
 ## Tarefa 4:
 
-Sincronizar tarefas períodicas
+Essa tarefa tem como objetivo criar um caso onde é propositalmente feito uma sincronização entre duas tarefas períodicas sendo acionadas no VxWorks. Dessa forma foi criado o source code [synced_tasks.c](/etapa_2/tarefa_4/synced_tasks.c).
+
+O código `synced-tasks.c` cria duas tarefas periódicas `periodicTask1` e `periodicTask2` que imprimem as letras do alfabeto de a-z e A-Z de forma sincronizada e sequencial, usando um semáforo para sincronizar o acesso à saída de cada tarefa. A utilização de delay para as tasks é necessario para que ambas as tarefas tenham tempo de executar em seus devidos momentos. Finalmente tendo o resulto a seguir:
+
 ![tarefa_4](/etapa_2/image_files/tarefa_4.png)
+
+## Análise:
+
