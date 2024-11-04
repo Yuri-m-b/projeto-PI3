@@ -4,7 +4,23 @@ Nessa etapa uma informação importante foi descoberta ao longo da criação das
 
 ## Tarefa 1:
 
-Criar uma tarefa que lê um pacote de rede
+O objetivo nessa tarefa é criar um source code que receba algum tipo de dado enviado por UDP. Sendo assim o source code [receiver_data](/etapa_2/tarefa_1/receiver_data.c) foi criado.
+
+`receiver_data.c` cria uma tarefa para receber pacotes de rede utilizando sockets UDP. Definindo uma task chamada `receivePackets` que é responsável por configurar um socket de rede, associá-lo a uma porta específica, no caso 21, e escutar pacotes que chegam. A função main segue o padrão que a gente vem usando até então, sendo o local onde a chamada da task é localizada.
+
+Como para essa tarefa é preciso enviar algum tipo de dado para o endereço IP do ambiente VxWorks que está esperando a chegada de dados, foi criado um script em python que envia uma string na mesma quantidade de vezes que é esperado de pacotes no source code utilizado no VxWorks.
+
+O script em python utilizado pode ser encontrado aqui: [udp_sender](/etapa_2/extra/udp_sender.py)
+
+Porém também é possível enviar um dado utilizando o comando no terminal a seguir:
+```
+echo "Hello from netcat" | nc -u *Raspberry IP* 21
+
+```
+
+Finalmente temos o resultado esperado, como pode ser visto na imagem a seguir:
+
+![tarefa_1](/etapa_2/image_files/tarefa_1.png)
 
 ## Tarefa 2:
 
@@ -62,7 +78,18 @@ Função criada com base nessa referência: https://cplusplus.com/reference/cstd
 
 ## Tarefa 3:
 
-Limitar pacotes enviados e adequar envios e recebimento para usar o protocolo UDP
+Para a tarefa 3, o objetivo é criar um código que implementa uma aplicação de envio de pacotes UDP no VxWorks com limitação.
+
+Sendo assim o código [send_limited_data](/etapa_2/tarefa_3/send_limited_data.c) cria uma tarefa separada para enviar uma série de pacotes para um IP e porta de servidor predefinidos, utilizando um loop. A função `sendPackage`, que é executada como uma tarefa, cria um socket UDP, configura o endereço do servidor e entra em um loop para enviar várias mensagens, cada uma com um número de pacote incrementado de acordo com o número máximo desejado. Após o envio de cada mensagem, a função registra o status e fecha o socket ao completar todas as transmissões.
+
+Para acompanhar o término da tarefa, um semáforo binário `taskDoneSem` é usado para sinalizar a função principal assim que todos os pacotes foram enviados. A função principal espera por esse semáforo e, ao recebê-lo, fecha a tarefa usando taskClose para garantir uma gestão limpa de recursos. Em seguida, o semáforo é deletado para evitar vazamento de recursos.
+
+Permitindo então uma gestão assíncrona da tarefa, garantindo sincronização adequada e controle do ciclo de vida da tarefa no VxWorks.
+
+O resultado obtido então é:
+![tarefa_3](/etapa_2/image_files/tarefa_3.png)
+
+Como o código para essa tarefa utiliza envio de dados, é preciso abrir um terminal extra que será o receptor das mensagens/pacotes enviados.
 
 ## Tarefa 4:
 

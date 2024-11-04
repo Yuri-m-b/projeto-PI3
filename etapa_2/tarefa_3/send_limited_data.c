@@ -1,19 +1,19 @@
-#include <stdio.h>
-#include <string.h>
-#include <vxWorks.h>
-#include <taskLib.h>
-#include <sockLib.h>
-#include <inetLib.h>
 #include <hostLib.h>
 #include <ioLib.h>
+#include <inetLib.h>
 #include <semLib.h>
+#include <sockLib.h>
+#include <stdio.h>
+#include <string.h>
+#include <taskLib.h>
+#include <vxWorks.h>
 
 #define SERVER_IP "192.168.0.113"  // IP do destino
 #define SERVER_PORT 21             // Porta do destino
 #define BUF_SIZE 1024              // Tamanho do buffer
 #define MAX_PACKAGE 10 
 
-SEM_ID taskDoneSem; // Semaphore para sinal de conclusão da task
+SEM_ID taskDoneSem; // "Semaforo" para sinal de conclusão da task
 
 // Funcao de log
 void logMsg(const char *fmt, ...) {

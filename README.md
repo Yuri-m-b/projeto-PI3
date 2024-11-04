@@ -28,7 +28,7 @@ Tarefas:
 
 Tarefas:
 
-- [ ] Criar uma tarefa que lê um pacote de rede.
+- [x] Criar uma tarefa que lê um pacote de rede.
 - [x] Criar um log para as tarefas.
 - [x] Limitar pacotes enviados e adequar envio e recebimento para usar o protocolo UDP.
 - [x] Sincronizar tarefas periódicas.
