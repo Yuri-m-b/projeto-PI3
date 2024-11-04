@@ -38,7 +38,7 @@ sudo apt install bison flex
 sudo apt install libssl-dev
 sudo apt install libgnutls28-dev
 `````
-Em seguida ter um servidor FTP instalado no seu host de desenvolvimento facilitará a implantação de aplicativos e permitirá o acesso ao sistema de arquivos do host a partir de um alvo VxWorks.
+Em seguida, ter um servidor FTP instalado no seu host onde é realizado o desenvolvimento facilitará a implementação de aplicativos e permitirá o acesso ao sistema de arquivos do host a partir de um alvo VxWorks.
 
 Para acomodar as diversas configurações de tempo de execução das imagens do kernel VxWorks incluídas nos SDKs, você pode estar interessado em usar uma opção de servidor FTP baseada no pyftpdlib.
 `````
@@ -69,7 +69,7 @@ Nessa etapa estaremos documentando dois passos, você só precisará fazer um de
 
 1- Metodo mais simples:
 
-Baixe o arquivo [kernel8.img](/etapa_1/setup_files/kernel8.img) desse repositorio e salve ele no cartão SD. Exemplo: (Cartão SD/kerlnel8.img)
+Baixe o arquivo [kernel8.img](/etapa_1/setup_files/kernel8.img) desse repositório e salve ele no cartão SD. Exemplo: (Cartão SD/kerlnel8.img)
 
 2- Compile e salve o seu propio arquivo u-boot seguindo os passos a seguir:
 
@@ -80,7 +80,7 @@ $ cd u-boot
 $ CROSS_COMPILE=aarch64-linux-gnu- make rpi_3_b_plus_defconfig  
 $ CROSS_COMPILE=aarch64-linux-gnu- make  
 ```
-Após compilar o arquivo u-boot.bin, copie e cole ele dentro do cartão SD como `kernel8.img`
+Após compilar o arquivo u-boot.bin, copie e cole ele no cartão SD como `kernel8.img`
 ## Crie uma pasta chamada vx no cartão SD
 Crie uma pasta chamada vx no seu Cartão SD e nela coloque o arquivo uVxWorks que pode ser encontrado dentro da pasta descompactada do SDK instalado na etapa: [(Configurar ambiente de desenvolvimento)](#configurar-ambiente-de-desenvolvimento)
 O arquivo `uVxWorks`pode ser encontrado no caminho `/vxsdk/bsps/rpi_3_0_1_1_2/uVxWorks`
@@ -91,6 +91,7 @@ O arquivo `uVxWorks`pode ser encontrado no caminho `/vxsdk/bsps/rpi_3_0_1_1_2/uV
 # Conectando Raspberry e boot com VxWorks
 Com o cartão SD pronto, já é possível inserir o cartão de volta no Raspberry Pi 3, agora para a conexão com o Raspberry utilizaremos um adaptador USB para UART.
 Nesse projeto utilizamos um Raspberry PI 3B+ então suas portas para comunicação UART podem ser encontradas nesse diagrama:
+
 ![sd](./etapa_1/setup_files/j8header-3b-plus.png)
 
 Conecte o pino 6 com o Ground do adaptador
@@ -99,9 +100,14 @@ Conecte o pino 8 com o pino RX do adaptador (TX<->RX)
 
 Conecte o pino 10 com o pino TX do adaptador (RX<->TX)
 
-Tenha certeza que os cabos no adaptador US-UART estão certos, caso não apareça nada no terminal após "bootar" o Raspberry, tente inverter os cabos no adaptador RX<->TX e verifique novamente.
+Tenha certeza que os cabos no adaptador US-UART estão certos, caso não apareça nada no terminal após "bootar" o Raspberry, verifique as conexões e tente novamente.
 
-Escolha algum programa de comunicação serial (por exemplo o minicom), e configure a conexão serial para ter os parametros a seguir:
+Escolha algum programa de comunicação serial (por exemplo o minicom):
+```
+sudo apt-get install minicom
+sudo minicom -s
+```
+Configure a conexão serial para ter os parametros a seguir e salve como dfl:
 ```
 Baud Rate: 115200
 Data: 8 bit
@@ -109,7 +115,13 @@ Stop: 1 bit
 Parity: None
 Flow Control: None
 ```
-
+Para começar o monitoramento na porta utilize o comando a seguir, considerando que ttsyUSB0 é a porta onde o adaptador está conectado.
+```
+ls /dev/tty* // Comando para ver quais portas existem no seu sistema.
+# minicom ttyUSB0
+ou apenas
+# minicom
+```
 Após começar o monitoramento na porta escolhida, ligue o Raspberry com o cartão SD já dentro e o VxWorks kernel vai "bootar" automaticamente:
 ```
 U-Boot 2024.10-01129-g7036abbd5c39 (Oct 19 2024 - 22:28:55 -0300)
@@ -196,6 +208,16 @@ This device is also accessible over telnet!
         E.g. telnet 192.168.0.241
 ```
 
+# Para acessar via telnet.
+Para acesso ao VxWorks sem a utilização do adaptador USB-UART, é preciso ter instalado o telnet.
+```
+sudo apt install telnet
+```
+E acessar o IP do seu Raspberry utilizando o comando:
+```
+telnet 192.168.0.241
+```
+
 # Desenvolvendo uma aplicação:
 
 ## Crie um arquivo em C como por exemplo foo.c:
@@ -227,7 +249,7 @@ Crie um servidor FTP na porta 21, utilizando como usúario e senha as seguintes 
 
 Abra um terminal na pasta `home`e rode o comando:
 ```
-$ sudo python -m pyftpdlib -p 21 -u target -P vxTarget -d $HOME &
+$ sudo python3 -m pyftpdlib -p 21 -u target -P vxTarget -d home &
 ```
 
 Anote o IP do host onde o servidor FTP foi aberto, em linux o comando `ip a` serve.
@@ -267,5 +289,5 @@ Hello world
 [vxWorks *]#
 ```
 
-# Referencia Principal
+# Referência Principal
 https://labs.windriver.com/downloads/wrsdk-vxworks7-docs/2103/README_raspberrypi3b.html
