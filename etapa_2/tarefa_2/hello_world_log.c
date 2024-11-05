@@ -15,7 +15,7 @@ void exampleTask(void) {
     taskDelay(100);
 }
 
-// Function to spawn a new task each time
+// Função para criar nova tarefa
 void repeat(void (*task)(void), int times) {
     for (int i = 0; i < times; i++) {
         taskSpawn("tExampleTask", 100, 0, 2000, (FUNCPTR)task, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
