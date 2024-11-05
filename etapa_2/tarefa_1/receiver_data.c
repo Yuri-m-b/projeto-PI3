@@ -26,7 +26,7 @@ void receivePackets(void) {
     struct sockaddr_in serverAddr; // Estrutura para guardar o addr do servidor
     char buffer[BUFFER_SIZE];        // Buffer do pacote que será enviado
     int receivedBytes;
-    int packetCount = 0;  // Counter for received packets
+    int packetCount = 0;  // Contador de pacotes recebidos
     
     // Criar socket UDP
     sock = socket(AF_INET, SOCK_DGRAM, 0); // Cria um socket para IPV4 e UDP
@@ -51,7 +51,7 @@ void receivePackets(void) {
 
     printf("Esperando por dados...\n");
 
-    // Esperando pacotes.
+    // Esperando pacotes...
     while (packetCount < MAX_PACKAGES) {
         receivedBytes = recvfrom(sock, buffer, BUFFER_SIZE, 0, NULL, NULL);
         if (receivedBytes == ERROR) {
@@ -73,7 +73,7 @@ void receivePackets(void) {
 }
 
 int main() {
-    // Cria uma "semaforo" binario
+    // Cria um "semaforo" binario
     taskDoneSem = semBCreate(SEM_Q_PRIORITY, SEM_EMPTY);
 
     int taskID = taskSpawn("tReceiver", 10, 0, 8000, (FUNCPTR) receivePackets, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
