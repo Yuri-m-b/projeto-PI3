@@ -101,3 +101,14 @@ O código `synced-tasks.c` cria duas tarefas periódicas `periodicTask1` e `peri
 
 ## Análise:
 
+Ao longo desta etapa, certas informações foram sendo descobertas ao longo das criações das tarefas, fazendo com que os códigos dessa etapa se tornassem mais descritivos e mais proxímos ao que se é esperado de um programa feito para VxWorks.
+
+Primeiramente o log para as mensagens, embora não conseguimos utilizar a biblioteca `logLib`, a função criada e utilizada nos códigos atuais se mostrou útil e funcional para todas as tarefas até o momento, os outputs das tarefas da etapa 1 que foram atualizadas para usar o `logMsg`continuam tendo os mesmos resultados de saída.
+
+Segunda informação muito importante que aprendemos durante essa etapa é o impactado de ter um `return`dentro da função main junto com as chamadas de `taskRespawn`. De acordo com a documentação oficial do VxWorks [link](https://www.uio.no/studier/emner/matnat/fys/FYS4220/h11/undervisningsmateriale/forelesninger-rt/2011-6_VxWorks-6.2_Application_Programmers_Guide.pdf) quando se têm um return na função main sem nenhum tipo de "proteção", porque o compilador em C adiciona automaticamente uma chamada para `exit()` no final da função `main()`, interrompendo assim a execução das tarefas. Esse foi o motivo pelo qual na etapa 1 estavamos tendo problemas com as tarefas que possuiam algum tipo de loop.
+
+Por fim, outra ferramente muito importante que descobrimos durante a etapa 2 foi a biblioteca `<semLib.h>`, que está possibilita o uso de rotinas com semáforos. Semáforos são a base para sincronização e exclusão mútua no VxWorks. Eles são poderosos em sua simplicidade e permitem diversas funcionalidades do VxWorks.
+
+Diferentes tipos de semáforos atendem a diferentes necessidades e, embora o comportamento entre eles varie, sua interface básica é a mesma. Esta biblioteca fornece rotinas de semáforo comuns a todos os tipos de semáforos do VxWorks. Para todos os tipos, as duas operações básicas são `semTake( )` e `semGive( )`, que representam a aquisição ou liberação de um semáforo.
+
+Mais informações pode ser encontrado nesse [link](https://www.ee.torontomu.ca/~courses/ee8205/Data-Sheets/Tornado-VxWorks/vxworks/ref/semLib.html).
