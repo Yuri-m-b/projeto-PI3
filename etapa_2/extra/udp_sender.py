@@ -2,7 +2,7 @@
 
 import socket
 
-SERVER_IP = "192.168.0.241"  # IP address do Raspberry com VxWorks
+SERVER_IP = "192.168.0.241"  # Endereço IP do Raspberry com VxWorks
 SERVER_PORT = 21  # Port utilizada pelo VxWorks
 MESSAGE = "Hello, VxWorks!"  # Mensagem/dado que será enviado
 REPEAT = 10
