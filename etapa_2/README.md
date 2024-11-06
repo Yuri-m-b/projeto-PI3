@@ -112,3 +112,9 @@ Por fim, outra ferramente muito importante que descobrimos durante a etapa 2 foi
 Diferentes tipos de semáforos atendem a diferentes necessidades e, embora o comportamento entre eles varie, sua interface básica é a mesma. Esta biblioteca fornece rotinas de semáforo comuns a todos os tipos de semáforos do VxWorks. Para todos os tipos, as duas operações básicas são `semTake( )` e `semGive( )`, que representam a aquisição ou liberação de um semáforo.
 
 Mais informações pode ser encontrado nesse [link](https://www.ee.torontomu.ca/~courses/ee8205/Data-Sheets/Tornado-VxWorks/vxworks/ref/semLib.html).
+
+## Vídeos:
+[Tarefa 1](https://youtu.be/v4y85i2JlaY)
+[Tarefa 2](https://vimeo.com/1026952657?share=copy)
+[Tarefa 3](https://youtu.be/BtDhhfU1jMg)
+
