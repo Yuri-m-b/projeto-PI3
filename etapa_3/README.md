@@ -6,6 +6,16 @@ A tarefa 1 é uma tarefa com o intuito de utilizar as tarefas desenvolvidas prev
 
 Um deles sendo o fato de que ambas os dispositivos possuem o mesmo endereço MAC e estão configurados como clientes DHCP, de forma que quando os dois dispositivos são ligados, é necessário um servidor DHCP para fornecer um endereço de IP para os hosts, no entando, por conta do endereço MAC duplicado na rede, a tabela arp é mantida com apenas um endereço IP e um endereço MAC, de forma que se faz necessária a alteração tanto do endereço MAC quanto do endereço IP do dispositivo.
 
+Usando alguns dos comandos do próprio sistema operacional, é possível realizar alterações de endereço IP, por exemplo:
+```
+ifconfig <NOME DA INTERFACE> inet <NOVO ENDEREÇO IP>
+```
+
+Também é possível fazer com que o equipamento não seja um cliente DHCP por meio da linha de comando:
+```
+ifconfig <NOME DA INTERFACE> -dhcp
+```
+
 ## Tarefa 2:
 
 A tarefa 2 segue o mesmo princípio da tarefa 1, de forma que se deseja realizar a comunicação entre as raspberrys em períodos diferentes.
