@@ -16,6 +16,7 @@ Também é possível fazer com que o equipamento não seja um cliente DHCP por m
 ifconfig <NOME DA INTERFACE> -dhcp
 ```
 
+
 ## Tarefa 2:
 
 A tarefa 2 segue o mesmo princípio da tarefa 1, de forma que se deseja realizar a comunicação entre as raspberrys em períodos diferentes.
@@ -23,3 +24,5 @@ A tarefa 2 segue o mesmo princípio da tarefa 1, de forma que se deseja realizar
 ## Tarefa 3:
 
 A tarefa 3 foi listada para ser desenvolvida em conjunto com as tarefas 1 e 2, visando usar um sniffer (Wireshark) para analisar os pacotes enviados entre as raspberrys.
+O uso do wireshark foi validado, de forma que foi possível visualizar o envio e recebimento de pacotes entre host que não eram de origem ou destinados à máquina que estava com a captura do wireshark rodando.
+
