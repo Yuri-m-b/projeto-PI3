@@ -15,6 +15,10 @@ Também é possível fazer com que o equipamento não seja um cliente DHCP por m
 ```
 ifconfig <NOME DA INTERFACE> -dhcp
 ```
+No entanto, o fato de que o VxWorks realiza uma alteração no endereço MAC das raspberrys para o valor 00:11:22:33:44:55, um dos dispositivos pode ter o endereço MAC alterado por meio do seguinte comando:
+```
+ifconfig <NOME DA INTERFACE> lladdr <NOVO ENDEREÇO MAC>
+```
 
 
 ## Tarefa 2:
@@ -26,3 +30,6 @@ A tarefa 2 segue o mesmo princípio da tarefa 1, de forma que se deseja realizar
 A tarefa 3 foi listada para ser desenvolvida em conjunto com as tarefas 1 e 2, visando usar um sniffer (Wireshark) para analisar os pacotes enviados entre as raspberrys.
 O uso do wireshark foi validado, de forma que foi possível visualizar o envio e recebimento de pacotes entre host que não eram de origem ou destinados à máquina que estava com a captura do wireshark rodando.
 
+
+Por meio do wireshark também é possível realizar o monitoramento dos comandos realizados via telnet, como por exemplo:
+![Screenshot from 2024-12-01 12-54-57](https://github.com/user-attachments/assets/4e5ef8bd-f36f-4460-848c-8fe1e87daa65)
