@@ -22,7 +22,7 @@ ifconfig <NOME DA INTERFACE> lladdr <NOVO ENDEREÇO MAC>
 Realizando ambas as alterações de IP e de endereço MAC a comunicação entre raspberrys deveria ser direta. Entretanto no decorrer do desenvolvimento diversos detalhes que antes não condiziam com as tarefas desenvolvidas nas etapas anteriores acabaram por afetar gravemente o desenvolvimento desta etapa.
 O principal deles sendo o fato da fixação de endereço MAC pelo sistema operacional de forma que não é possível realizar uma conexão direta em um sistema onde esteja presente um servidor DHCP, será necessário configurar um dos dispositivos para depois conectar o próximo dispositivo para poder configura-lo e assim por diante.
 
-Apesar das alterações serem simples, consistindo em alterações de IP, MAC e desativação de DHCP, realizar a alteração do endereço MAC do dispositivo torna-o inacessível para qualquer outro host conectado na rede, mesmo com a alteração do endereço MAC sendo visível por meio do comando arp.
+Apesar das alterações serem simples, consistindo em alterações de IP, MAC e desativação de DHCP, realizar a alteração do endereço MAC do dispositivo torna-o inacessível para qualquer outro host conectado na rede, mesmo com a alteração do endereço MAC sendo visível por meio do comando ```arp -a```.
 
 
 
