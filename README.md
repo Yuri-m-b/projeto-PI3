@@ -41,6 +41,15 @@ Tarefas:
 
 **Objetivo**: Modificar as tarefas desenvolvidas nas etapas anteriores de forma que seja possível realizar a comunicação entre as duas Raspberry Pi e utilizando algum software de monitoramento de rede analisar o envio e recebimento de pacotes entre os dois dispositivos.
 
+Tarefas:
+
+- [] Realizar a comunicação entre um par de tarefas em diferentes RPi3.
+- [] Criar dois pares de tarefas que se comunicam com períodos diferentes, cada uma em uma RPi3.
+- [] Monitorar envio e recebimento de pacotes.
+- [] Registrar e demonstrar por resultados e textos a comunicação entre pelo menos UM par de tarefas.
+- [] Registrar e demonstrar por resultados e textos a comunicação entre dois pares de tarefas com períodos diferentes.
+- [] Demonstrar resultados da monitoração dos pacotes sendo enviados e recebidos pela rede.
+
 **Entrega**: [Etapa 3](/etapa_3/)
 
 # Setup
@@ -67,3 +76,7 @@ https://wiki.emacinc.com/wiki/Getting_Started_With_Minicom
 https://www.ee.torontomu.ca/~courses/ee8205/Data-Sheets/Tornado-VxWorks/vxworks/ref/libIndex.html
 
 https://www.uio.no/studier/emner/matnat/fys/FYS4220/h11/undervisningsmateriale/forelesninger-rt/2011-6_VxWorks-6.2_Application_Programmers_Guide.pdf
+
+https://pebblebay.com/vxworks-7-boot-loader/
+
+https://daq00.triumf.ca/~daqweb/doc/vxworks/tornado2/docs/vxworks/guide/c-config5.html

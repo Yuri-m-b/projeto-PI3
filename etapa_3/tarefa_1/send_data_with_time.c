@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <taskLib.h>
+#include <time.h>
 #include <vxWorks.h>
 
 #define SERVER_IP "192.168.0.113"  // IP do destino
@@ -23,6 +24,17 @@ void logMsg(const char *fmt, ...) {
     va_end(args);
 }
 
+// Função para pegar e formatar o tempo da maquina
+void getMachineTime(char *buffer, size_t bufferSize) {
+    time_t rawTime = time(NULL);  // Tempo atual em segundos
+    struct tm localTime;
+    
+    // Converte rawTime na estrutura tm para formatar o tempo em hh:mm:ss
+    localtime_r(&rawTime, &localTime);  
+    snprintf(buffer, bufferSize, "%02d:%02d:%02d",
+             localTime.tm_hour, localTime.tm_min, localTime.tm_sec);
+}
+
 void sendPackage(void)
 {
     int sock;
@@ -31,7 +43,7 @@ void sendPackage(void)
     int bytesSent;
 
     // Cria socket UDP
-    sock = socket(AF_INET, SOCK_DGRAM, 0);  // Cria um socket para IPV4 e UDP
+    sock = socket(AF_INET, SOCK_DGRAM, 0);
     if (sock < 0)
     {
         logMsg("Erro ao criar o socket\n");
@@ -44,9 +56,14 @@ void sendPackage(void)
     serverAddr.sin_port = htons(SERVER_PORT);          // Define a PORT (convertendo para network bit)
     serverAddr.sin_addr.s_addr = inet_addr(SERVER_IP); // Converte IP de string para binario
 
-    for (int i=0; i<MAX_PACKAGE; i++){
+    for (int i = 0; i < MAX_PACKAGE; i++) {
+        // Obtem tempo atual da maquina
+        char timeStr[16];
+        getMachineTime(timeStr, sizeof(timeStr));
+
         // Cria a mensagem a ser enviada
-        snprintf(sendBuf, sizeof(sendBuf), "Olá, esse é o pacote %d de teste enviado pela rede!", i);
+        snprintf(sendBuf, sizeof(sendBuf),
+                 "Pacote %d enviado no tempo da maquina em: %s", i, timeStr);
 
         // Envia o pacote
         bytesSent = sendto(sock, sendBuf, strlen(sendBuf), 0, (struct sockaddr *)&serverAddr, sizeof(serverAddr));
@@ -57,7 +74,7 @@ void sendPackage(void)
             return;
         }
 
-        logMsg("Pacote enviado com sucesso, %d bytes enviados.\n", bytesSent);
+        logMsg("Pacote enviado com sucesso, %d bytes enviados.\n %s\n", bytesSent, sendBuf);
         taskDelay(100);
     }
 
@@ -95,3 +112,4 @@ int main() {
 
     return 0;
 }
+
