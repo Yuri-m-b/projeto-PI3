@@ -251,9 +251,13 @@ target name (tn)     :
 startup script (s)   : 
 other (o)            : 
 ```
+
 Foi tentado colocar o comando `ifconfig usb2End0 lladdr 00:11:22:33:44:52` que altera o valor do endereço MAC da Raspberry, no campo `other (o)` onde em teoria definiria um novo valor MAC para o VxWorks, porém esse valor além de não ser salvo após o reboot da Raspberry, o endereço MAC padrão não é alterado.
 O uso do wireshark foi validado, de forma que foi possível visualizar o envio e recebimento de pacotes entre host que não eram de origem ou destinados à máquina que estava com a captura do wireshark rodando.
 
+### 5- Utilizando Wireshark para encontrar possíveis problemas
 
-Por meio do wireshark também é possível realizar o monitoramento dos comandos realizados via telnet, como por exemplo:
+Por meio do wireshark é possível realizar o monitoramento dos comandos realizados via telnet, como por exemplo:
 ![Screenshot from 2024-12-01 12-54-57](https://github.com/user-attachments/assets/4e5ef8bd-f36f-4460-848c-8fe1e87daa65)
+
+Todavia o software acaba não ajudando muito para resolução do problema com o endereço MAC.
