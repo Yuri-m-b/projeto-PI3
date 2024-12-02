@@ -37,6 +37,12 @@ Tarefas:
 
 **Entrega**: [Etapa 2](/etapa_2/)
 
+## Etapa 3: Comunicação e monitoramento de pacotes de rede
+
+**Objetivo**: Modificar as tarefas desenvolvidas nas etapas anteriores de forma que seja possível realizar a comunicação entre as duas Raspberry Pi e utilizando algum software de monitoramento de rede analisar o envio e recebimento de pacotes entre os dois dispositivos.
+
+**Entrega**: [Etapa 3](/etapa_3/)
+
 # Setup
 
 Como o setup para o VxWorks requer muitos passos e a documentação oficial para o Raspberry 3B+ está desatualizada, decidimos criar um tutorial que documenta todas as etapas e problemas que encontramos ao longo do processo de setup para iniciar o desenvolvimento. Esse tutorial pode ser encontrado em: [SETUP](/SETUP.md)
