@@ -1,127 +1,26 @@
 # Tarefas
 
-## Tarefa 1:
 
-A tarefa 1 é uma tarefa com o intuito de utilizar as tarefas desenvolvidas previamente para que duas tarefas, cada uma dentro de uma raspberry diferente, se comuniquem. Contudo, alguns detalhes, que antes não afetavam o desenvolvimento das outras tarefas, surgiram e defasaram o desenvolvimento da atividade.
+Durante o desenvolvimento da etapa 3 do projeto, foi identificado um problema crítico relacionado ao uso de Raspberry Pi 3B+, por causa dos seus endereços MAC idênticos. Essa limitação impactou diretamente a comunicação entre os dispositivos na rede, mesmo após tentativas de resolução envolvendo a alteração manual dos endereços IP e MAC, da desativação do cliente DHCP e até a pesquisa por uma possível alteração em algum arquivo base do VxWorks.
 
-Um deles sendo o fato de que ambas os dispositivos possuem o mesmo endereço MAC e estão configurados como clientes DHCP, de forma que quando os dois dispositivos são ligados, é necessário um servidor DHCP para fornecer um endereço de IP para os hosts, no entando, por conta do endereço MAC duplicado na rede, a tabela arp é mantida com apenas um endereço IP e um endereço MAC, de forma que se faz necessária a alteração tanto do endereço MAC quanto do endereço IP do dispositivo.
+Apesar de os comandos disponíveis no sistema operacional permitirem mudanças nos endereços MAC e IP, o comportamento fixo do sistema operacional em redefinir os endereços MAC para um valor padrão comprometeu a conectividade e inviabilizou uma solução definitiva para o problema.
 
-Usando alguns dos comandos do próprio sistema operacional, é possível realizar alterações de endereço IP, por exemplo:
+Não foi descartado a hipótese de a versão de desenvolvimento do VxWorks utilizada no projeto até o momento, tenha como limitação e restrição da fabricante quaisquer alterações nos arquivos Build do VxWorks assim como uma restrição forçada para possíveis alterações nos endereços MAC e IP do dispositivo, sendo mais um ponto que inviabiliza o escopo atual do projeto.
+
+Uma possível pista que defende essa hipótese é o paragrafo 3.1 do termo de licença gratuito da empresa fornecedora do VxWorks [more](https://labs.windriver.com/downloads/NCLA.txt):
+
 ```
-ifconfig <NOME DA INTERFACE> inet <NOVO ENDEREÇO IP>
+3 RESTRICTIONS.
+3.1 You shall not, are not permitted to, and will not permit or enable third
+parties to: (a) use the Software for any commercial purpose; (b) modify, create
+derivative works of, translate, reverse engineer, decompile, disassemble
+(except to the extent applicable laws specifically prohibit such restriction)
+or attempt to derive the Source Code of any of the Software provided to You in
+Object Code or other machine executable form;..."
 ```
+Decidimos também levar esse problema diretamente para o suporte da WindRiver, porém até o momento não tivemos uma resposta conclusiva.
 
-Também é possível fazer com que o equipamento não seja um cliente DHCP por meio da linha de comando:
-```
-ifconfig <NOME DA INTERFACE> -dhcp
-```
-No entanto, o fato de que o VxWorks realiza uma alteração no endereço MAC das raspberrys para o valor 00:11:22:33:44:55, um dos dispositivos pode ter o endereço MAC alterado por meio do seguinte comando:
-```
-ifconfig <NOME DA INTERFACE> lladdr <NOVO ENDEREÇO MAC>
-```
-Realizando ambas as alterações de IP e de endereço MAC a comunicação entre raspberrys deveria ser direta. Entretanto no decorrer do desenvolvimento diversos detalhes que antes não condiziam com as tarefas desenvolvidas nas etapas anteriores acabaram por afetar gravemente o desenvolvimento desta etapa.
-O principal deles sendo o fato da fixação de endereço MAC pelo sistema operacional de forma que não é possível realizar uma conexão direta em um sistema onde esteja presente um servidor DHCP, será necessário configurar um dos dispositivos para depois conectar o próximo dispositivo para poder configura-lo e assim por diante.
-
-Apesar das alterações serem simples, consistindo em alterações de IP, MAC e desativação de DHCP, realizar a alteração do endereço MAC do dispositivo torna-o inacessível para qualquer outro host conectado na rede, mesmo com a alteração do endereço MAC sendo visível por meio do comando ```arp -a```.
-
-
-
-Porém o maior problema tem sido a troca de MAC feita por comando shell, no momento tentamos vários comandos para resolver esse problemas, porém não tivemos resultados positivos até o momento. Todos os testes feitos até o momento podem ser encontrados [aqui](#testes-feitos-para-tentar-resolver-o-problema-do-mac-address)
-
-### Criamos tarefas que fazem o que seria esperado durante a comunicação entre as 2 Raspberries PI 3B+
-
-A primeira tarefa foi desenvolvida utilizando como base o source code criado na etapa 2 [send_limited_data.c](/etapa_2/tarefa_3/send_limited_data.c), porém agora a tarefa envia junto com a mensagem o tempo atual da maquína, como pode ser visto na imagem abaixo.
-
-![tarefa1](/etapa_3/image_files/send_data_with_time.png)
-
-A tarefa executou exatamente o que era esperado, porém é preciso notar que como ela foi executada dentro da Raspberry PI 3B+, o tempo mostrado é referente ao tempo que a Raspberry estava ligada.
-
-Para a proxíma etapa foi pensado em criar uma tarefa que recebe a informação de tempo de maquina, neste caso da minha maquina, e mostra a diferença do tempo que o dado teve entre envio e recebimento.
-
-Seguindo o desenvolvimento utilizado na etapa 2, foi ajustado um script em Python que enviasse a informação do tempo a partir do protocolo UDP e porta 21.
-
-Script: [udp_sender](/etapa_3/tarefa_1/udp_sender_time.py)
-
-E então foi criado o source code [receiver_data_time](/etapa_3/tarefa_1/receiver_data_time.c), que define o tempo da Raspberry a partir do primeiro dado recebido, e a partir dele calcula a diferença de tempo do pacote enviado comparado com o pacote recebido.
-
-![receiver](/etapa_3/image_files/receiver_data.png)
-
-Entretando existe uma falha nesse codigo, o ideal é que o clock ou a utilização de um servidor NTP seja utilizado para sincronizar o tempo entre as maquinas conectadas na mesma rede. Possívelmente isso terá que ser utilizado nas proxímas tarefas do projeto.
-
-## Tarefa 2:
-
-A tarefa 2 segue o mesmo princípio da tarefa 1, de forma que se deseja realizar a comunicação entre as raspberrys em períodos diferentes.
-
-## Tarefa 3:
-
-Utilizando o software `Wireshark` e os scripts utilizados na [etapa2](/etapa_2/) sendo eles [send_limited_data](/etapa_2/tarefa_3/send_limited_data.c) e [receiver_data](/etapa_2/tarefa_1/receiver_data.c) , podemos verificar seus logs a partir do Wireshark. É facilmente possível limitar a filtragem dos pacotes enviados a partir do IP da maquína (192.168.0.113), o IP da Raspberry (192.168.0.241) e até o tipo de protocolo `udp`como pode ser visto nas imagens a seguir.
-
-Quando estamos enviando dados(send_limited_data):
-
-![wireshark1](/etapa_3/image_files/wireshark1_sending.png)
-
-Quando estamos recebendo dados(send_limited_data):
-
-![wireshark2](/etapa_3/image_files/wireshark_2receiver.png)
-
-Pelo WireShark podemos ver varías informações que serão uteis nas proxímas etapas do projeto, como por exemplo o tempo, o tamanho do pacote, a porta utilizada, e até mesmo seu payload (a informação enviada).
-
-O WireShark também tem sido muito útil para os processos de "debugging" do VxWorks, onde conseguimos descobrir o comportamento da comunicação das Raspberry's entre elas e entre a maquína.
-
-
-
-## WORKFLOW DE COMANDOS PARA SETAR 1 RASPBERRY COM MAC E IP DIFERENTES
-### CONECTAR RASP POR USB
-ifconfig usb2End0 down
-
-(ignore mensagens sobre falha DHCP)
-
-ifconfig usb2End0 lladdr 00:11:22:33:44:54
-
-ifconfig usb2End0 up
-
-(esperar rasp ligar)
-
-arp -d 192.168.0.241 (limpa arp table da maquina)
-
-ifconfig usb2End0 192.168.0.240 netmask 255.255.255.0
-
-
-## Conectando PC direto no Raspberry PI 3B+
-
-- Comandos para Raspberry
-```
-# Configurar IP estatico na Raspberry:
-cmd
-ifconfig usb2End0 inet 192.168.1.1 netmask 255.255.255.0
-# Desligar DHCP:
-ifconfig usb2End0 -dhcp
-```
-
-- Comandos para Linux
-```
-# ifconfig -a para descobrir nome da interface
-# Configurar IP estatico no Linux:
-sudo ifconfig eth0 192.168.1.2 netmask 255.255.255.0
-```
-
-- Testar connectividade
-```
-ping 192.168.1.1
-```
-
-Restaurar Configuração da Raspberry:
-```
-ifconfig usb2End0 down
-ifconfig usb2End0 up
-dhcpc usb2End0
-```
-
-- Restaurar Configuração de Network do PC
-```
-sudo dhclient eth0
-```
-
+Sendo assim, segue abaixo alguns dos testes feitos por nós para tentar resolver o problema do endereço MAC idêntico das duas raspberries, assim como parte das tarefas.
 
 ## Testes feitos para tentar resolver o problema do MAC Address.
 
@@ -261,3 +160,125 @@ Por meio do wireshark é possível realizar o monitoramento dos comandos realiza
 ![Screenshot from 2024-12-01 12-54-57](https://github.com/user-attachments/assets/4e5ef8bd-f36f-4460-848c-8fe1e87daa65)
 
 Todavia o software acaba não ajudando muito para resolução do problema com o endereço MAC.
+
+## Tarefa 1:
+
+A tarefa 1 é uma tarefa com o intuito de utilizar as tarefas desenvolvidas previamente para que duas tarefas, cada uma dentro de uma raspberry diferente, se comuniquem. Contudo, alguns detalhes, que antes não afetavam o desenvolvimento das outras tarefas, surgiram e defasaram o desenvolvimento da atividade.
+
+Um deles sendo o fato de que ambas os dispositivos possuem o mesmo endereço MAC e estão configurados como clientes DHCP, de forma que quando os dois dispositivos são ligados, é necessário um servidor DHCP para fornecer um endereço de IP para os hosts, no entando, por conta do endereço MAC duplicado na rede, a tabela arp é mantida com apenas um endereço IP e um endereço MAC, de forma que se faz necessária a alteração tanto do endereço MAC quanto do endereço IP do dispositivo.
+
+Usando alguns dos comandos do próprio sistema operacional, é possível realizar alterações de endereço IP, por exemplo:
+```
+ifconfig <NOME DA INTERFACE> inet <NOVO ENDEREÇO IP>
+```
+
+Também é possível fazer com que o equipamento não seja um cliente DHCP por meio da linha de comando:
+```
+ifconfig <NOME DA INTERFACE> -dhcp
+```
+No entanto, o fato de que o VxWorks realiza uma alteração no endereço MAC das raspberrys para o valor 00:11:22:33:44:55, um dos dispositivos pode ter o endereço MAC alterado por meio do seguinte comando:
+```
+ifconfig <NOME DA INTERFACE> lladdr <NOVO ENDEREÇO MAC>
+```
+Realizando ambas as alterações de IP e de endereço MAC a comunicação entre raspberrys deveria ser direta. Entretanto no decorrer do desenvolvimento diversos detalhes que antes não condiziam com as tarefas desenvolvidas nas etapas anteriores acabaram por afetar gravemente o desenvolvimento desta etapa.
+O principal deles sendo o fato da fixação de endereço MAC pelo sistema operacional de forma que não é possível realizar uma conexão direta em um sistema onde esteja presente um servidor DHCP, será necessário configurar um dos dispositivos para depois conectar o próximo dispositivo para poder configura-lo e assim por diante.
+
+Apesar das alterações serem simples, consistindo em alterações de IP, MAC e desativação de DHCP, realizar a alteração do endereço MAC do dispositivo torna-o inacessível para qualquer outro host conectado na rede, mesmo com a alteração do endereço MAC sendo visível por meio do comando ```arp -a```.
+
+
+
+Porém o maior problema tem sido a troca de MAC feita por comando shell, no momento tentamos vários comandos para resolver esse problemas, porém não tivemos resultados positivos até o momento. Todos os testes feitos até o momento podem ser encontrados [aqui](#testes-feitos-para-tentar-resolver-o-problema-do-mac-address)
+
+### Criamos tarefas que fazem o que seria esperado durante a comunicação entre as 2 Raspberries PI 3B+
+
+A primeira tarefa foi desenvolvida utilizando como base o source code criado na etapa 2 [send_limited_data.c](/etapa_2/tarefa_3/send_limited_data.c), porém agora a tarefa envia junto com a mensagem o tempo atual da maquína, como pode ser visto na imagem abaixo.
+
+![tarefa1](/etapa_3/image_files/send_data_with_time.png)
+
+A tarefa executou exatamente o que era esperado, porém é preciso notar que como ela foi executada dentro da Raspberry PI 3B+, o tempo mostrado é referente ao tempo que a Raspberry estava ligada.
+
+Para a proxíma etapa foi pensado em criar uma tarefa que recebe a informação de tempo de maquina, neste caso da minha maquina, e mostra a diferença do tempo que o dado teve entre envio e recebimento.
+
+Seguindo o desenvolvimento utilizado na etapa 2, foi ajustado um script em Python que enviasse a informação do tempo a partir do protocolo UDP e porta 21.
+
+Script: [udp_sender](/etapa_3/tarefa_1/udp_sender_time.py)
+
+E então foi criado o source code [receiver_data_time](/etapa_3/tarefa_1/receiver_data_time.c), que define o tempo da Raspberry a partir do primeiro dado recebido, e a partir dele calcula a diferença de tempo do pacote enviado comparado com o pacote recebido.
+
+![receiver](/etapa_3/image_files/receiver_data.png)
+
+Entretando existe uma falha nesse codigo, o ideal é que o clock ou a utilização de um servidor NTP seja utilizado para sincronizar o tempo entre as maquinas conectadas na mesma rede. Possívelmente isso terá que ser utilizado nas proxímas tarefas do projeto.
+
+## Tarefa 2:
+
+A tarefa 2 segue o mesmo princípio da tarefa 1, de forma que se deseja realizar a comunicação entre as raspberrys em períodos diferentes.
+
+## Tarefa 3:
+
+Utilizando o software `Wireshark` e os scripts utilizados na [etapa2](/etapa_2/) sendo eles [send_limited_data](/etapa_2/tarefa_3/send_limited_data.c) e [receiver_data](/etapa_2/tarefa_1/receiver_data.c) , podemos verificar seus logs a partir do Wireshark. É facilmente possível limitar a filtragem dos pacotes enviados a partir do IP da maquína (192.168.0.113), o IP da Raspberry (192.168.0.241) e até o tipo de protocolo `udp`como pode ser visto nas imagens a seguir.
+
+Quando estamos enviando dados(send_limited_data):
+
+![wireshark1](/etapa_3/image_files/wireshark1_sending.png)
+
+Quando estamos recebendo dados(send_limited_data):
+
+![wireshark2](/etapa_3/image_files/wireshark_2receiver.png)
+
+Pelo WireShark podemos ver varías informações que serão uteis nas proxímas etapas do projeto, como por exemplo o tempo, o tamanho do pacote, a porta utilizada, e até mesmo seu payload (a informação enviada).
+
+O WireShark também tem sido muito útil para os processos de "debugging" do VxWorks, onde conseguimos descobrir o comportamento da comunicação das Raspberry's entre elas e entre a maquína.
+
+
+
+## WORKFLOW DE COMANDOS PARA SETAR 1 RASPBERRY COM MAC E IP DIFERENTES
+### CONECTAR RASP POR USB
+ifconfig usb2End0 down
+
+(ignore mensagens sobre falha DHCP)
+
+ifconfig usb2End0 lladdr 00:11:22:33:44:54
+
+ifconfig usb2End0 up
+
+(esperar rasp ligar)
+
+arp -d 192.168.0.241 (limpa arp table da maquina)
+
+ifconfig usb2End0 192.168.0.240 netmask 255.255.255.0
+
+
+## Conectando PC direto no Raspberry PI 3B+
+
+- Comandos para Raspberry
+```
+# Configurar IP estatico na Raspberry:
+cmd
+ifconfig usb2End0 inet 192.168.1.1 netmask 255.255.255.0
+# Desligar DHCP:
+ifconfig usb2End0 -dhcp
+```
+
+- Comandos para Linux
+```
+# ifconfig -a para descobrir nome da interface
+# Configurar IP estatico no Linux:
+sudo ifconfig eth0 192.168.1.2 netmask 255.255.255.0
+```
+
+- Testar connectividade
+```
+ping 192.168.1.1
+```
+
+Restaurar Configuração da Raspberry:
+```
+ifconfig usb2End0 down
+ifconfig usb2End0 up
+dhcpc usb2End0
+```
+
+- Restaurar Configuração de Network do PC
+```
+sudo dhclient eth0
+```
