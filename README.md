@@ -39,7 +39,8 @@ Tarefas:
 
 ## Etapa 3: Comunicação e monitoramento de pacotes de rede
 
-**Objetivo**: Modificar as tarefas desenvolvidas nas etapas anteriores de forma que seja possível realizar a comunicação entre as duas Raspberry Pi e utilizando algum software de monitoramento de rede analisar o envio e recebimento de pacotes entre os dois dispositivos.
+**Objetivo**: Nessa etapa descobrimos que os objetivos anteriormente definidos para esse projeto, em relação a utilização do VxWorks para comunicação, envio e administração de tarefas não seria possível porque essas são funções apenas dísponiveis na versão paga do software. Após uma nova conversa com os professores foi definido então a utilização de uma versão linux com suporte a RT Preempt (Real Time Computing). Sendo assim a versão da Raspberry OS com suporte a Real time utilizado é a `6.6.51+rpt-rpi-v8`.
+
 
 Tarefas:
 
@@ -80,3 +81,13 @@ https://www.uio.no/studier/emner/matnat/fys/FYS4220/h11/undervisningsmateriale/f
 https://pebblebay.com/vxworks-7-boot-loader/
 
 https://daq00.triumf.ca/~daqweb/doc/vxworks/tornado2/docs/vxworks/guide/c-config5.html
+
+https://github.com/remusmp/rpi-rt-kernel
+
+https://www.youtube.com/watch?v=fMgjAuBoFz8
+
+https://forums.raspberrypi.com/viewtopic.php?t=344994
+
+https://github.com/lemariva/RT-Tools-RPi
+
+https://lemariva.com/blog/2018/07/raspberry-pi-preempt-rt-patching-tutorial-for-kernel-4-14-y
