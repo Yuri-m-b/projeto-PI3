@@ -44,12 +44,12 @@ Tarefas:
 
 Tarefas:
 
-- [] Realizar a comunicação entre um par de tarefas em diferentes RPi3.
-- [] Criar dois pares de tarefas que se comunicam com períodos diferentes, cada uma em uma RPi3.
-- [] Monitorar envio e recebimento de pacotes.
-- [] Registrar e demonstrar por resultados e textos a comunicação entre pelo menos UM par de tarefas.
-- [] Registrar e demonstrar por resultados e textos a comunicação entre dois pares de tarefas com períodos diferentes.
-- [] Demonstrar resultados da monitoração dos pacotes sendo enviados e recebidos pela rede.
+- [x] Realizar a comunicação entre um par de tarefas em diferentes RPi3.
+- [x] Criar dois pares de tarefas que se comunicam com períodos diferentes, cada uma em uma RPi3.
+- [x] Monitorar envio e recebimento de pacotes.
+- [x] Registrar e demonstrar por resultados e textos a comunicação entre pelo menos UM par de tarefas.
+- [x] Registrar e demonstrar por resultados e textos a comunicação entre dois pares de tarefas com períodos diferentes.
+- [x] Demonstrar resultados da monitoração dos pacotes sendo enviados e recebidos pela rede.
 
 **Entrega**: [Etapa 3](/etapa_3/)
 
