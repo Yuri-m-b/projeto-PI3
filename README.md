@@ -53,6 +53,23 @@ Tarefas:
 
 **Entrega**: [Etapa 3](/etapa_3/)
 
+## Etapa 4: Comunicação e monitoramento de pacotes de rede
+
+**Objetivo**: O objetivo desta etapa do projeto é avaliar o desempenho do sistema de comunicação em tempo real, analisando parâmetros temporais e a perda de pacotes em diferentes cenários de processamento. Para isso, serão realizadas alterações nas tarefas existentes para aumentar a carga de processamento, permitindo a análise comparativa entre o comportamento original e o ajustado. Adicionalmente, o comportamento das tarefas será registrado e descrito detalhadamente, com foco nos impactos das mudanças no desempenho do sistema, buscando fornecer resultados e insights sobre a estabilidade e eficiência da comunicação em tempo real.
+
+
+Tarefas:
+
+- [] Realizar a análise de parâmetros temporais do sistema.
+- [] Alterar as tarefas para realizarem um processamento maior.
+- [] Analisar os parâmetros temporais com as novas tarefas de maior processamento.
+- [] Verificar e comparar a perda de pacote nos dois cenários
+- [] Registrar comportamento e descrever o comportamento das três tarefas criadas para analise da comunicação em tempo real.
+- [] Trazer resultados e analises para os resultados dos parâmetros em tempo reais.
+- [] Trazer resultados e analises para os resultados dos recebimentos e percas de pacotes
+
+**Entrega**: [Etapa 4](/etapa_34)
+
 # Setup
 
 Como o setup para o VxWorks requer muitos passos e a documentação oficial para o Raspberry 3B+ está desatualizada, decidimos criar um tutorial que documenta todas as etapas e problemas que encontramos ao longo do processo de setup para iniciar o desenvolvimento. Esse tutorial pode ser encontrado em: [SETUP](/SETUP.md)
