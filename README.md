@@ -2,7 +2,7 @@
 Alunos: Conrado Becker Gressler e Yuri Marques Barboza
 
 
-Resumo: Realizar a análise de parâmetros temporais de um sistema distribuído utilizando RPi3 e VxWorks, com mensagens de tamanho fixas de 16 Mb utilizando protocolo UDP.
+Resumo: Realizar a análise de parâmetros temporais de um sistema distribuído utilizando RPi3 com linux com suporte a RT Preempt, com comunicação utilizando protocolo UDP.
 
 ## Etapa 1: Setup e tarefas de exemplo
 
