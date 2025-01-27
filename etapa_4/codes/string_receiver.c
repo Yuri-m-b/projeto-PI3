@@ -42,7 +42,7 @@ int main() {
     memset(&server_addr, 0, sizeof(server_addr)); // Inicializa a estrutura com zeros
     server_addr.sin_family = AF_INET;            // Define a família de endereços (IPv4)
     server_addr.sin_addr.s_addr = INADDR_ANY;    // Aceita conexões de qualquer endereço
-    server_addr.sin_port = htons(PORT);          // Define a porta para escuta (12345)
+    server_addr.sin_port = htons(PORT);          // Define a porta para escuta
 
     // Faz o bind do socket para o endereço e porta configurados
     if (bind(sock, (const struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {

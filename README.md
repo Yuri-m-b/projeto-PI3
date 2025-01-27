@@ -60,13 +60,13 @@ Tarefas:
 
 Tarefas:
 
-- [] Realizar a análise de parâmetros temporais do sistema.
-- [] Alterar as tarefas para realizarem um processamento maior.
-- [] Analisar os parâmetros temporais com as novas tarefas de maior processamento.
-- [] Verificar e comparar a perda de pacote nos dois cenários
-- [] Registrar comportamento e descrever o comportamento das três tarefas criadas para analise da comunicação em tempo real.
-- [] Trazer resultados e analises para os resultados dos parâmetros em tempo reais.
-- [] Trazer resultados e analises para os resultados dos recebimentos e percas de pacotes
+- [x] Realizar a análise de parâmetros temporais do sistema.
+- [x] Alterar as tarefas para realizarem um processamento maior.
+- [x] Analisar os parâmetros temporais com as novas tarefas de maior processamento.
+- [x] Verificar e comparar a perda de pacote nos dois cenários
+- [x] Registrar comportamento e descrever o comportamento das três tarefas criadas para analise da comunicação em tempo real.
+- [x] Trazer resultados e analises para os resultados dos parâmetros em tempo reais.
+- [x] Trazer resultados e analises para os resultados dos recebimentos e percas de pacotes
 
 **Entrega**: [Etapa 4](/etapa_34)
 
@@ -108,3 +108,19 @@ https://forums.raspberrypi.com/viewtopic.php?t=344994
 https://github.com/lemariva/RT-Tools-RPi
 
 https://lemariva.com/blog/2018/07/raspberry-pi-preempt-rt-patching-tutorial-for-kernel-4-14-y
+
+https://stackoverflow.com/questions/5888737/c-socket-send-commands-in-string
+
+https://stackoverflow.com/questions/72243701/writing-an-image-to-a-socket-in-c
+
+https://gitee.com/openharmony/docs/blob/c940e87462148931d2f51ac65636749941d43648/en/application-dev/media/image/image-receiver-native.md
+
+https://homepages.inf.ed.ac.uk/rbf/BOOKS/PHILLIPS/cips2ed.pdf
+
+https://www.youtube.com/watch?v=WbLOh6NQzyE
+
+https://stackoverflow.com/questions/29979826/blur-image-filter-c
+
+https://www.quora.com/How-do-you-turn-an-image-into-grayscale-in-C
+
+https://abhijitnathwani.github.io/blog/2018/01/08/rgbtogray-Image-using-C

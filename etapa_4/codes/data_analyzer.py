@@ -10,7 +10,6 @@ def main():
     x_values = data["Index"]
     y_values = data["Time"]
 
-    # Plot data
     plt.figure(figsize=(10, 6))
     plt.plot(x_values, y_values, marker="o", label="Data Points")
 
