@@ -23,7 +23,7 @@ Tarefas:
 - [x] Documentar código e mostrar resultado para a tarefa períodica.
 - [x] Documentar código e mostrar resultado para a tarefa que envia para a rede.
 
-**Entrega**: [Etapa 1](/projeto-PI3/VxWorks/etapa_1/)
+**Entrega**: [Etapa 1](/VxWorks/etapa_1/)
 
 ## Etapa 2: Periodicidade, logs e sincronização de tarefas
 
@@ -39,7 +39,7 @@ Tarefas:
 - [x] Documentar código e mostrar resultado para a tarefa que lê pacotes da rede.
 - [x] Registrar e analisar diferenças nas tarefas criadas até o momento utilizando logs e adequando as tarefas de testes para o escopo desejado.
 
-**Entrega**: [Etapa 2]((/projeto-PI3/VxWorks/etapa_2/))
+**Entrega**: [Etapa 2](/VxWorks/etapa_2/)
 
 ## Etapa 3: Comunicação e monitoramento de pacotes de rede
 
@@ -55,7 +55,7 @@ Tarefas:
 - [x] Registrar e demonstrar por resultados e textos a comunicação entre dois pares de tarefas com períodos diferentes.
 - [x] Demonstrar resultados da monitoração dos pacotes sendo enviados e recebidos pela rede.
 
-**Entrega**: [Etapa 3](/projeto-PI3/LinuxRTPreempt/etapa_3/)
+**Entrega**: [Etapa 3](/LinuxRTPreempt/etapa_3/)
 
 ## Etapa 4: Comunicação e monitoramento de pacotes de rede
 
@@ -72,7 +72,7 @@ Tarefas:
 - [x] Trazer resultados e analises para os resultados dos parâmetros em tempo reais.
 - [x] Trazer resultados e analises para os resultados dos recebimentos e percas de pacotes
 
-**Entrega**: [Etapa 4](/projeto-PI3/LinuxRTPreempt/etapa_4/)
+**Entrega**: [Etapa 4](/LinuxRTPreempt/etapa_4/)
 
 # Setup
 
