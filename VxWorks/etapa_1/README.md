@@ -67,4 +67,4 @@ Terminal que recebe:
 ```
 Olá, esse é um pacote de teste enviado pela rede!
 ```
-![tarefa_3](/etapa_1/tarefa_3/tarefa_3.png)
+![tarefa_3](/VxWorks//etapa_1/tarefa_3/tarefa_3.png)

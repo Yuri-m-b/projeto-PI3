@@ -12,7 +12,7 @@ Tarefas:
 - [x] Registrar e demonstrar por resultados e textos a comunicação entre dois pares de tarefas com períodos diferentes.
 - [x] Demonstrar resultados da monitoração dos pacotes sendo enviados e recebidos pela rede.
 
-**Entrega**: [Etapa 3](/etapa_3/)
+**Entrega**: [Etapa 3](/LinuxRTPreempt/etapa_3/)
 
 ## Etapa 4: Comunicação e monitoramento de pacotes de rede
 
@@ -29,4 +29,4 @@ Tarefas:
 - [x] Trazer resultados e analises para os resultados dos parâmetros em tempo reais.
 - [x] Trazer resultados e analises para os resultados dos recebimentos e percas de pacotes
 
-**Entrega**: [Etapa 4](/etapa_34)
+**Entrega**: [Etapa 4](/LinuxRTPreempt/etapa_4/)

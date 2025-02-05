@@ -13,7 +13,7 @@ Tarefas:
 - [x] Documentar código e mostrar resultado para a tarefa períodica.
 - [x] Documentar código e mostrar resultado para a tarefa que envia para a rede.
 
-**Entrega**: [Etapa 1](/etapa_1/)
+**Entrega**: [Etapa 1](/VxWorks/etapa_1/)
 
 ## Etapa 2: Periodicidade, logs e sincronização de tarefas
 
@@ -29,4 +29,4 @@ Tarefas:
 - [x] Documentar código e mostrar resultado para a tarefa que lê pacotes da rede.
 - [x] Registrar e analisar diferenças nas tarefas criadas até o momento utilizando logs e adequando as tarefas de testes para o escopo desejado.
 
-**Entrega**: [Etapa 2](/etapa_2/)
+**Entrega**: [Etapa 2](/VxWorks/etapa_2/)
