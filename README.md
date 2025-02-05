@@ -1,8 +1,12 @@
-# Análise de determinismo em comunicação de tempo real distribuída no RPi3 com o RTOS VxWorks
+# Análise de determinismo em comunicação de tempo real distribuída no RPi3 com linux RT Preempt
 Alunos: Conrado Becker Gressler e Yuri Marques Barboza
 
 
 Resumo: Realizar a análise de parâmetros temporais de um sistema distribuído utilizando RPi3 com linux com suporte a RT Preempt, com comunicação utilizando protocolo UDP.
+
+## Nota:
+
+Inicialmente esse projeto tinha como objetivo utilizar o sistema operacional VxWorks instalados em duas Raspberry Pi 3B+, para fazer uma análise de comunicação em tempo real. Durante o desenvolvimento do projeto foi descoberto que não seria possível fazer as tarefas desejadas devido as limitações da versão base do SDK do VxWorks. Sendo assim esse projeto foi separado em duas partes, onde a `etapa 1` e `etapa 2` estão ligadas ao que foi feito e funciona para VxWorks, e as `etapa 3` e `etapa 4` estão relacionadas a anàlise e desenvolvimento utilizando o sistema embarcado linux com suporte a RT Preempt nas Raspberry.
 
 ## Etapa 1: Setup e tarefas de exemplo
 
@@ -19,7 +23,7 @@ Tarefas:
 - [x] Documentar código e mostrar resultado para a tarefa períodica.
 - [x] Documentar código e mostrar resultado para a tarefa que envia para a rede.
 
-**Entrega**: [Etapa 1](/etapa_1/)
+**Entrega**: [Etapa 1](/projeto-PI3/VxWorks/etapa_1/)
 
 ## Etapa 2: Periodicidade, logs e sincronização de tarefas
 
@@ -35,7 +39,7 @@ Tarefas:
 - [x] Documentar código e mostrar resultado para a tarefa que lê pacotes da rede.
 - [x] Registrar e analisar diferenças nas tarefas criadas até o momento utilizando logs e adequando as tarefas de testes para o escopo desejado.
 
-**Entrega**: [Etapa 2](/etapa_2/)
+**Entrega**: [Etapa 2]((/projeto-PI3/VxWorks/etapa_2/))
 
 ## Etapa 3: Comunicação e monitoramento de pacotes de rede
 
@@ -51,7 +55,7 @@ Tarefas:
 - [x] Registrar e demonstrar por resultados e textos a comunicação entre dois pares de tarefas com períodos diferentes.
 - [x] Demonstrar resultados da monitoração dos pacotes sendo enviados e recebidos pela rede.
 
-**Entrega**: [Etapa 3](/etapa_3/)
+**Entrega**: [Etapa 3](/projeto-PI3/LinuxRTPreempt/etapa_3/)
 
 ## Etapa 4: Comunicação e monitoramento de pacotes de rede
 
@@ -68,7 +72,7 @@ Tarefas:
 - [x] Trazer resultados e analises para os resultados dos parâmetros em tempo reais.
 - [x] Trazer resultados e analises para os resultados dos recebimentos e percas de pacotes
 
-**Entrega**: [Etapa 4](/etapa_34)
+**Entrega**: [Etapa 4](/projeto-PI3/LinuxRTPreempt/etapa_4/)
 
 # Setup
 
